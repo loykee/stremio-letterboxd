@@ -9,7 +9,7 @@ const catalogId = 'letterboxd-watchlist';
 const manifest = {
   id: 'com.maricristofaro.letterboxd-watchlist',
   version: '1.0.0',
-  name: 'My Letterboxd Watchlist',
+  name: "Mari's Letterboxd Watchlist",
   description: 'Mirrors Mari’s public Letterboxd watchlist into a Stremio movie catalog.',
   logo: 'https://raw.githubusercontent.com/loykee/stremio-letterboxd/main/assets/icon.svg',
   resources: ['catalog'],
@@ -19,7 +19,7 @@ const manifest = {
     {
       type: 'movie',
       id: catalogId,
-      name: 'My Letterboxd Watchlist',
+      name: "Mari's Letterboxd Watchlist",
     },
   ],
 };
