@@ -1,3 +1,7 @@
+if (typeof globalThis.File === 'undefined') {
+  globalThis.File = class File {};
+}
+
 const cheerio = require('cheerio');
 
 const LETTERBOXD_ORIGIN = 'https://letterboxd.com';
