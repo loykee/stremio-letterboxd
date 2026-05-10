@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mari-letterboxd-watchlist
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: LETTERBOXD_WATCHLIST_URL
+        value: https://letterboxd.com/maricristofaro/watchlist/
+      - key: SYNC_INTERVAL_HOURS
+        value: "6"
+      - key: MAX_ITEMS
+        value: "500"
+      - key: PORT
+        value: "7010"
