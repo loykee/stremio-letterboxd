@@ -11,6 +11,7 @@ const manifest = {
   version: '1.0.0',
   name: 'Mari Letterboxd Watchlist',
   description: 'Mirrors Mari Cristofaro’s public Letterboxd watchlist into a Stremio movie catalog.',
+  logo: 'https://raw.githubusercontent.com/loykee/stremio-letterboxd/main/assets/icon.svg',
   resources: ['catalog'],
   types: ['movie'],
   idPrefixes: ['tt'],

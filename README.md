@@ -2,6 +2,8 @@
 
 Standalone Stremio addon that mirrors a public Letterboxd watchlist into a `movie` catalog backed by IMDb IDs. Because the catalog IDs are IMDb IDs, Stremio's built-in Cinemeta addon supplies the details page and any installed torrent addons can attach streams normally.
 
+The manifest includes a custom addon icon hosted from this repository's `assets/icon.svg`.
+
 ## Endpoints
 
 - `/manifest.json`
