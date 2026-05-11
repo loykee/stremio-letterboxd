@@ -20,6 +20,7 @@ const manifest = {
       type: 'movie',
       id: catalogId,
       name: "Mari's Letterboxd Watchlist",
+      extra: [{ name: 'skip', isRequired: false }],
     },
   ],
 };
@@ -35,13 +36,18 @@ const service = new CatalogService({
 
 const builder = new addonBuilder(manifest);
 
-builder.defineCatalogHandler(async ({ type, id }) => {
+const PAGE_SIZE = 100;
+
+builder.defineCatalogHandler(async ({ type, id, extra }) => {
   if (type !== 'movie' || id !== catalogId) {
     return { metas: [] };
   }
 
+  const skip = Number.parseInt(extra?.skip, 10) || 0;
+  const all = service.getCatalog();
+
   return {
-    metas: service.getCatalog(),
+    metas: all.slice(skip, skip + PAGE_SIZE),
   };
 });
 
