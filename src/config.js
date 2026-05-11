@@ -9,7 +9,7 @@ const DEFAULTS = {
   USER_AGENT: 'Mari-Letterboxd-Watchlist-Addon/1.0 (+https://letterboxd.com/maricristofaro/watchlist/)',
   CACHE_FILE: path.join(process.cwd(), 'data', 'watchlist-cache.json'),
   // Options: 'watchlist' (Letterboxd order), 'runtime', 'imdbRating', 'year'
-  SORT_BY: 'imdbRating',
+  SORT_BY: 'runtime',
 };
 
 function parsePositiveInt(value, fallback) {
