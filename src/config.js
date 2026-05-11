@@ -8,6 +8,8 @@ const DEFAULTS = {
   PORT: 7010,
   USER_AGENT: 'Mari-Letterboxd-Watchlist-Addon/1.0 (+https://letterboxd.com/maricristofaro/watchlist/)',
   CACHE_FILE: path.join(process.cwd(), 'data', 'watchlist-cache.json'),
+  // Options: 'watchlist' (Letterboxd order), 'runtime', 'imdbRating', 'year'
+  SORT_BY: 'imdbRating',
 };
 
 function parsePositiveInt(value, fallback) {
@@ -24,6 +26,7 @@ function loadConfig(env = process.env) {
     port: parsePositiveInt(env.PORT, DEFAULTS.PORT),
     userAgent: env.USER_AGENT || DEFAULTS.USER_AGENT,
     cacheFile: env.CACHE_FILE || DEFAULTS.CACHE_FILE,
+    sortBy: env.SORT_BY || DEFAULTS.SORT_BY,
   };
 }
 

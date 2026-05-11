@@ -38,13 +38,21 @@ const builder = new addonBuilder(manifest);
 
 const PAGE_SIZE = 100;
 
+const SORT_COMPARATORS = {
+  watchlist: null, // preserve original Letterboxd order
+  imdbRating: (a, b) => (b.imdbRating || 0) - (a.imdbRating || 0),
+  runtime: (a, b) => (a.runtimeMinutes || 0) - (b.runtimeMinutes || 0),
+  year: (a, b) => (b.year || 0) - (a.year || 0),
+};
+
 builder.defineCatalogHandler(async ({ type, id, extra }) => {
   if (type !== 'movie' || id !== catalogId) {
     return { metas: [] };
   }
 
   const skip = Number.parseInt(extra?.skip, 10) || 0;
-  const all = service.getCatalog();
+  const comparator = SORT_COMPARATORS[config.sortBy] ?? SORT_COMPARATORS.imdbRating;
+  const all = comparator ? [...service.getCatalog()].sort(comparator) : service.getCatalog();
 
   return {
     metas: all.slice(skip, skip + PAGE_SIZE),

@@ -56,6 +56,16 @@ function isConservativeMatch(source, resolved) {
   return normalizeTitle(source.title) === normalizeTitle(resolved.name);
 }
 
+// Parses "102 min" or "1h 42m" style strings into an integer number of minutes.
+function parseRuntimeMinutes(runtime) {
+  if (!runtime) return null;
+  const minOnly = /^(\d+)\s*min$/i.exec(String(runtime).trim());
+  if (minOnly) return Number.parseInt(minOnly[1], 10);
+  const hm = /(?:(\d+)\s*h)?\s*(?:(\d+)\s*m)?/i.exec(String(runtime).trim());
+  if (hm && (hm[1] || hm[2])) return (Number.parseInt(hm[1] || '0', 10) * 60) + Number.parseInt(hm[2] || '0', 10);
+  return null;
+}
+
 async function fetchCinemetaMeta(imdbId, { fetchImpl = fetch }) {
   const url = `https://v3-cinemeta.strem.io/meta/movie/${imdbId}.json`;
   const response = await fetchImpl(url);
@@ -112,6 +122,8 @@ async function resolveMovie(entry, options = {}) {
     }
   }
 
+  const runtimeMinutes = parseRuntimeMinutes(cinemetaMeta.runtime);
+
   return {
     status: 'resolved',
     meta: {
@@ -119,6 +131,10 @@ async function resolveMovie(entry, options = {}) {
       type: 'movie',
       name: cinemetaMeta.name || entry.title,
       poster: cinemetaMeta.poster || entry.poster || undefined,
+      year: cinemetaMeta.year || entry.year || undefined,
+      imdbRating: cinemetaMeta.imdbRating || undefined,
+      runtime: cinemetaMeta.runtime || undefined,
+      runtimeMinutes: runtimeMinutes || undefined,
     },
   };
 }
